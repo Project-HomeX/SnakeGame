@@ -1,5 +1,3 @@
-package Game;
-
 import processing.core.PApplet;
 
 public class Food {
