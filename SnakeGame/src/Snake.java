@@ -1,60 +1,86 @@
 import java.util.ArrayList;
+
 import processing.core.PApplet;
 
+/**
+ * Snake class
+ * 
+ *
+ */
 public class Snake {
-	float x = 10;
-	float y = 10; 
-	float xspeed = 20;
+	float x = 0;
+	float y = 0;
+
+	float xspeed = 10;
 	float yspeed = 0;
-	float scl = 20;
+	static float total = 0;
+	
+	ArrayList<PVector> tail = new ArrayList<PVector>();
 	PApplet parrent;
-	
-	ArrayList<Integer> snakeXLength = new ArrayList<Integer>();
-	ArrayList<Integer> snakeYLength = new ArrayList<Integer>();
-	private int lengthOfSnake = 3;
-	
-	
-	public Snake(PApplet p, float scl) {
-		this.scl = scl;
+
+	public Snake(PApplet p) {
+		// TODO Auto-generated constructor stub
+		this.x = 300;
+		this.y = 300;
+		this.xspeed = 20;
+		this.yspeed = 0;
 		parrent = p;
-		this.x = p.width/2;
-		this.y = p.height/2;
 	}
-	
-	//Getter and setters
-	public float getX(){
-		return x;
-	}
-	public float getY(){
-		return y;
-	}
-	
-	public void update(){
-		if( x >= 590) {
+	/**
+	 * update the snakes location.
+	 */
+	public void update() {
+		if (total > 0) {
+			if (total == tail.size() && !tail.isEmpty()) {
+				tail.remove(0);
+			} 
+				tail.add(new PVector(x, y));
+		}
+		if (x >= 590) {
 			x = 0;
 		}
-		else if (x <= 10) {
+		// I changed this to neg. 10 to fix the flickering bug at the adge of
+		// window.
+		else if (x <= -10) {
 			x = 600;
 		}
-		
-		if( y >= 590) {
+
+		if (y >= 590) {
 			y = 0;
 		}
-		else if (y <= 10) {
+		// same
+		else if (y <= -10) {
 			y = 600;
 		}
 		
-		x = x+ xspeed;
-		y = y+yspeed;
+		this.x = x + xspeed;
+		this.y = y + yspeed;
 	}
-	
-	public void show(){
+	public ArrayList<PVector> getTail(){
+		return this.tail;
+	}
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	/**
+	 * show the updated snake at its now location.
+	 */
+	public void show() {
 		parrent.fill(255);
-		parrent.rect(x,y,scl,scl);
+		for (PVector v : tail) {
+			parrent.rect(v.x, v.y, 20, 20);
+		}
+		parrent.rect(x, y, 20, 20);
 	}
-	
-	public void dir(int x, int y){
-		xspeed = x;
-		yspeed = y;
+
+	public void dir(float x, float y) {
+		// if((x<0 && xspeed>0) || (y<0 && yspeed > 0))
+		xspeed = x * 20;
+		yspeed = y * 20;
 	}
 }
