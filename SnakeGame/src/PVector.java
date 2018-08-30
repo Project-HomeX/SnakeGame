@@ -1,5 +1,6 @@
 /**
- * 2d Vector
+ * PVector is a class to store
+ * 2D points
  * @author Project-X
  *
  */

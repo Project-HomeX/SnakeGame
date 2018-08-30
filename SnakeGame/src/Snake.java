@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 /**
  * Snake class
- * 
+ * @author Project-X
  *
  */
 public class Snake {

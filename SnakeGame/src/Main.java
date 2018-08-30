@@ -4,6 +4,10 @@ import java.util.List;
 import processing.core.PApplet;
 /**
  * Main class where the game starts running.
+ * this class extends PApplet to use the 
+ * Processing library.
+ * This Game is created by following Dan Shiffman's 
+ * YouTube Video. 
  * @author Project-X
  * 
  */
@@ -29,7 +33,6 @@ public class Main extends PApplet {
 		snake=new Snake(this);
 		food = new Food(this);		
 	}
-	//this is a loop method... it loads every U second (I don't know the exact second so a called it U). 
 	public void draw() {
 		background(0);
 		collision();
